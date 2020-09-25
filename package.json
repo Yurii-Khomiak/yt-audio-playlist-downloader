@@ -2,9 +2,9 @@
   "name": "pl_dl",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "download": "node index.js"
+    "download": "node lib/index.js"
   },
   "keywords": [],
   "author": "",

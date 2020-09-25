@@ -134,26 +134,29 @@ class PlaylistDownloader {
     }
 }
 
+const download = ({
+    playlistUrl,
+    destination,
+    album,
+    artist
+}) => {
+    const downloader = new PlaylistDownloader(playlistUrl, {
+        destinationDirectory: destination,
+        metadata: { album, artist }
+    });
+    downloader.onDownloadedFile((outputFile, index) => {
+        console.log(`${index}. Downloaded "${outputFile}".`);
+    });
+    downloader.download();
+};
+
 const main = () => {
     if (!args.playlistUrl) {
         console.log('Playlist URL wasn\'t provided.');
         process.exit(1);
     }
 
-    const downloader = new PlaylistDownloader(
-        args.playlistUrl,
-        {
-            destinationDirectory: args.destination,
-            metadata: {
-                album: args.album,
-                artist: args.artist
-            }
-        }
-    );
-    downloader.onDownloadedFile((outputFile, index) => {
-        console.log(`${index}. Downloaded "${outputFile}".`);
-    });
-    downloader.download();
+    download(args);
 };
 
 main();

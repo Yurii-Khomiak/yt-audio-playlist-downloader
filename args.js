@@ -1,6 +1,6 @@
 const yargs = require('yargs');
 
-yargs
+const { argv } = yargs
     .option('destination', {
         alias: 'd',
         type: 'string',
@@ -17,7 +17,11 @@ yargs
     .help();
 
 module.exports = {
-    ...yargs.argv,
-    playlistUrl: yargs.argv._[0]
+    /** @type {string | null} */
+    playlistUrl: argv._[0] || null,
+    /** @type {string | null} */
+    destination: argv.destination || null,
+    album: argv.album || '',
+    artist: argv.artist || ''
 };
 

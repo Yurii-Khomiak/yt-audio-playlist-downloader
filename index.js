@@ -1,15 +1,9 @@
 const path = require('path');
 const EventEmitter = require('events');
-const yargs = require('yargs');
+const args = require('./args');
 
 const ytdl = require('youtube-dl');
 const ffmpeg = require('fluent-ffmpeg');
-
-const DESTINATION_DIRECTORY =
-    'E:\\media\\music\\playlists\\bardcore';
-
-const PLAYLIST_URL =
-    'https://www.youtube.com/playlist?list=PLLPlc3Vsjr1klc1EXnNKjfMKm6NH5LCc4';
 
 const AUDIO_FORMAT = Object.freeze({
     MP3: 'mp3'
@@ -140,14 +134,19 @@ class PlaylistDownloader {
     }
 }
 
-const main = async () => {
+const main = () => {
+    if (!args.playlistUrl) {
+        console.log('Playlist URL wasn\'t provided.');
+        process.exit(1);
+    }
+
     const downloader = new PlaylistDownloader(
-        PLAYLIST_URL,
+        args.playlistUrl,
         {
-            destinationDirectory: DESTINATION_DIRECTORY,
+            destinationDirectory: args.destination,
             metadata: {
-                album: 'Bardcore',
-                artist: 'Medieval Times'
+                album: args.album,
+                artist: args.artist
             }
         }
     );

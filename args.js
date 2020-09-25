@@ -1,4 +1,7 @@
 const yargs = require('yargs');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 const { argv } = yargs
     .option('destination', {
@@ -20,7 +23,8 @@ module.exports = {
     /** @type {string | null} */
     playlistUrl: argv._[0] || null,
     /** @type {string | null} */
-    destination: argv.destination || null,
+    destination: argv.destination ||
+        fs.mkdtempSync(`${os.tmpdir()}${path.sep}`),
     album: argv.album || '',
     artist: argv.artist || ''
 };

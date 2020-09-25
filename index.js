@@ -75,7 +75,7 @@ class PlaylistDownloader {
     }
 
     /**
-     * @param {(outputFile: string) => void} listener
+     * @param {(title: string) => void} listener
      */
     onDownloadedFile(listener) {
         this._emitter.on('downloadedFile', listener);
@@ -105,7 +105,7 @@ class PlaylistDownloader {
         });
 
         this._currentIndex++;
-        this._emitter.emit('downloadedFile', outputFile, this._currentIndex);
+        this._emitter.emit('downloadedFile', title, this._currentIndex);
     }
 
     _getOutputFilepath(title) {
@@ -144,10 +144,12 @@ const download = ({
         destinationDirectory: destination,
         metadata: { album, artist }
     });
-    downloader.onDownloadedFile((outputFile, index) => {
-        console.log(`${index}. Downloaded "${outputFile}".`);
+    downloader.onDownloadedFile((title, index) => {
+        console.log(`${index}. Downloaded "${title}".`);
     });
+
     downloader.download();
+    console.log(`Downloading into "${destination}".`);
 };
 
 const main = () => {

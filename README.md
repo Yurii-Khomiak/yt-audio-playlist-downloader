@@ -1,4 +1,4 @@
-# YouTube MP3 playlist downloader
+# YouTube audio playlist downloader
 
 Script which allows to download YouTube playlist and store every video in `.mp3`
 format.

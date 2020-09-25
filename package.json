@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "fluent-ffmpeg": "^2.1.2",
     "yargs": "^16.0.3",
